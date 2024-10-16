@@ -129,6 +129,11 @@ pub async fn static_path(Path(path): Path<String>) -> impl IntoResponse {
 
 ### How It Works
 
+The original idea for this crate was inspired by the [Assets and Cache Busting](https://rust-on-nails.com/docs/full-stack-web/cache-busting/)
+section of the [Rust on Nails](https://rust-on-nails.com/) guide. That made use of the [Ructe](https://docs.rs/ructe/latest/ructe/) 
+HTML template system for Rust. This solution is a more minimal implementation. It is just focused on embedding static assets and cache
+busting using generated hashes. 
+
 The `static_files!` macro generates:
 
 - A `StaticFile` struct for each file, containing:
