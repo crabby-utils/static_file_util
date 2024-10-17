@@ -1,0 +1,15 @@
+[package]
+name = "example-axum"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+static_file_util = { path = "../../" }
+axum = { version = "0.7.7", features = ["macros"] }
+tokio = { version = "1", features = ["full"] }
+lazy_static = "1.4"
+mime = "0.3"
+
+[build-dependencies]
+static_file_util = { path = "../../" }
