@@ -8,7 +8,7 @@ use static_file_util::static_files;
 use tokio::net::TcpListener;
 
 static_files!(
-    (crab_svg, "../images/crab.svg", mime::IMAGE_SVG),
+    (crab_svg, "../images/wikimedia-crab.svg", mime::IMAGE_SVG),
     (styles_css, "../css/styles.css", mime::TEXT_CSS),
 );
 
