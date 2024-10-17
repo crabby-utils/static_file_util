@@ -4,6 +4,9 @@
 process of embedding static assets into your project and automatically provides hashes for cache-busting, making it
 ideal for web applications and similar use cases.
 
+Check the [axum example](https://github.com/crabby-utils/static_file_util/blob/main/examples/axum/src/main.rs) for
+details of how to use this in a web application to serve static files, like images or CSS.
+
 ## Features
 
 - Define static files with ease using a single macro.
@@ -129,10 +132,13 @@ pub async fn static_path(Path(path): Path<String>) -> impl IntoResponse {
 
 ### How It Works
 
-The original idea for this crate was inspired by the [Assets and Cache Busting](https://rust-on-nails.com/docs/full-stack-web/cache-busting/)
-section of the [Rust on Nails](https://rust-on-nails.com/) guide. That made use of the [Ructe](https://docs.rs/ructe/latest/ructe/) 
-HTML template system for Rust. This solution is a more minimal implementation. It is just focused on embedding static assets and cache
-busting using generated hashes. 
+The original idea for this crate was inspired by
+the [Assets and Cache Busting](https://rust-on-nails.com/docs/full-stack-web/cache-busting/)
+section of the [Rust on Nails](https://rust-on-nails.com/) guide. That made use of
+the [Ructe](https://docs.rs/ructe/latest/ructe/)
+HTML template system for Rust. This solution is a more minimal implementation. It is just focused on embedding static
+assets and cache
+busting using generated hashes.
 
 The `static_files!` macro generates:
 
