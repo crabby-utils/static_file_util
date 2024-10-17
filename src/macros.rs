@@ -3,6 +3,7 @@ macro_rules! static_files {
     ($(($name:ident, $file_path:expr, $mime:expr)),* $(,)?) => {
         use mime::Mime;
 
+        #[derive(Debug)]
         pub struct StaticFile {
             pub content: &'static [u8],
             pub name: &'static str,
@@ -23,22 +24,31 @@ macro_rules! static_files {
 
         lazy_static::lazy_static! {
             $(
-                pub static ref $name: StaticFile = StaticFile {
-                    content: include_bytes!($file_path),
-                    name: Box::leak(format!("{}-{}.{}",
-                        $file_path.rsplit('/').next().unwrap().rsplit('.').nth(1).unwrap(),
-                        env!(concat!(stringify!($name), "_HASH")),
-                        $file_path.rsplit('.').next().unwrap()
-                    ).into_boxed_str()),
-                    mime: &$mime,
+                pub static ref $name: StaticFile = {
+                    let file_name = $file_path.rsplit('/').next().unwrap();
+                    let (base_name, extension) = file_name.rsplit_once('.').unwrap();
+
+                    StaticFile {
+                        content: include_bytes!($file_path),
+                        name: Box::leak(format!("{}-{}.{}",
+                                base_name,
+                                env!(concat!(stringify!($name), "_HASH")),
+                                extension
+                            ).into_boxed_str()),
+                        mime: &$mime,
+                    }
                 };
             )*
 
-            pub static ref STATICS: Vec<&'static StaticFile> = vec![
-                $(
-                    &*$name,
-                )*
-            ];
+            pub static ref STATICS: Vec<&'static StaticFile> = {
+                let mut v = vec![
+                    $(
+                        &*$name,
+                    )*
+                ];
+                v.sort_by_key(|s| s.name);
+                v
+            };
         }
     };
 }
