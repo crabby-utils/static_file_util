@@ -6,10 +6,10 @@ publish = false
 
 [dependencies]
 static_file_util = { path = "../../" }
-axum = { version = "0.7.7", features = ["macros"] }
+axum = { version = "0.7", features = ["macros"] }
 tokio = { version = "1", features = ["full"] }
 lazy_static = "1.4"
 mime = "0.3"
 
 [build-dependencies]
-static_file_util = { path = "../../" }
+static_file_util = { path = "../../", features = ["process_file"] }

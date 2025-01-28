@@ -1,6 +1,6 @@
 [package]
 name = "static_file_util"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Darren Mothersele <rust@daz.is>"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
@@ -10,7 +10,10 @@ homepage = "https://github.com/crabby-utils/static_file_util"
 documentation = "https://docs.rs/static_file_util"
 readme = "README.md"
 
+[features]
+process_file = []
+
 [dependencies]
-base64ct = { version = "1.6.0", features = ["alloc"] }
-blake3 = "1.5.4"
-mime = "0.3.17"
+base64ct = { version = "1", features = ["alloc"] }
+blake3 = "1"
+mime = "0.3"

@@ -50,10 +50,9 @@ async fn handler() -> impl IntoResponse {
 
 async fn static_path(Path(path): Path<String>) -> impl IntoResponse {
     let path = path.trim_start_matches('/');
-    dbg!(&path);
 
     if let Some(data) = StaticFile::get(path) {
-        dbg!("got it");
+        println!("serve file: {}", &path);
         Response::builder()
             .status(StatusCode::OK)
             .header(
@@ -67,7 +66,7 @@ async fn static_path(Path(path): Path<String>) -> impl IntoResponse {
             .body(Body::from(data.content))
             .unwrap()
     } else {
-        dbg!("missed it");
+        println!("file not found: {}", &path);
         Response::builder()
             .status(StatusCode::NOT_FOUND)
             .body(Body::empty())

@@ -19,13 +19,15 @@ Add `static_file_util` as a dependency in your `Cargo.toml`:
 
 ```toml
 [dependencies]
-static_file_util = "0.1.0"
+static_file_util = "0.2"
 lazy_static = "1.4"   # Required dependency for lazy static initialization
 mime = "0.3"          # For handling MIME types
 
 [build-dependencies]
-static_file_util = "0.1.0"
+static_file_util = { version = "0.2", features = ["process_file"] }
 ```
+
+**PLEASE NOTE:** In v0.2 the `process_file` feature is required for the build-dependencies.
 
 ## Usage
 
